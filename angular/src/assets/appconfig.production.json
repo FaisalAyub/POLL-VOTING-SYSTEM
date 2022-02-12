@@ -1,5 +1,5 @@
 {
-  "remoteServiceBaseUrl": "http://localhost:22742",
+  "remoteServiceBaseUrl": "https://test-web-app-4.azurewebsites.net/",
   "appBaseUrl": "http://localhost:4200",
   "localeMappings": {
     "angular": [
