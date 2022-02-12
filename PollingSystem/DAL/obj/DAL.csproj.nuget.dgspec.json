@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\FaisalAyub\\source\\repos\\PollingSystem\\PollingSystem\\DAL\\DAL.csproj": {}
+    "E:\\IEEE Hackton Voting System\\Voting System\\POLL-VOTING-SYSTEM\\PollingSystem\\DAL\\DAL.csproj": {}
   },
   "projects": {
-    "C:\\Users\\FaisalAyub\\source\\repos\\PollingSystem\\PollingSystem\\DAL\\DAL.csproj": {
+    "E:\\IEEE Hackton Voting System\\Voting System\\POLL-VOTING-SYSTEM\\PollingSystem\\DAL\\DAL.csproj": {
       "version": "5.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\FaisalAyub\\source\\repos\\PollingSystem\\PollingSystem\\DAL\\DAL.csproj",
+        "projectUniqueName": "E:\\IEEE Hackton Voting System\\Voting System\\POLL-VOTING-SYSTEM\\PollingSystem\\DAL\\DAL.csproj",
         "projectName": "DAL",
-        "projectPath": "C:\\Users\\FaisalAyub\\source\\repos\\PollingSystem\\PollingSystem\\DAL\\DAL.csproj",
+        "projectPath": "E:\\IEEE Hackton Voting System\\Voting System\\POLL-VOTING-SYSTEM\\PollingSystem\\DAL\\DAL.csproj",
         "packagesPath": "C:\\Users\\FaisalAyub\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\FaisalAyub\\source\\repos\\PollingSystem\\PollingSystem\\DAL\\obj\\",
+        "outputPath": "E:\\IEEE Hackton Voting System\\Voting System\\POLL-VOTING-SYSTEM\\PollingSystem\\DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
