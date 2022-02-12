@@ -12,7 +12,7 @@ import * as moment from 'moment';
 })
 export class CreateOrEditPollModalComponent extends AppComponentBase {
 
-    @ViewChild('createOrEditModal') modal: ModalDirective;
+    @ViewChild('createOrEditModal', {static: true}) modal: ModalDirective;
 
 
     @Output() modalSave: EventEmitter<any> = new EventEmitter<any>();

@@ -24,10 +24,10 @@ import * as moment from 'moment';
 })
 export class PollsComponent extends AppComponentBase {
 
-    @ViewChild('createOrEditPollModal') createOrEditPollModal: CreateOrEditPollModalComponent;
-    @ViewChild('viewPollModalComponent') viewPollModal: ViewPollModalComponent;
-    @ViewChild('dataTable') dataTable: Table;
-    @ViewChild('paginator') paginator: Paginator;
+    @ViewChild('createOrEditPollModal', {static: true}) createOrEditPollModal: CreateOrEditPollModalComponent;
+    @ViewChild('viewPollModalComponent', {static: true}) viewPollModal: ViewPollModalComponent;
+    @ViewChild('dataTable', {static: true}) dataTable: Table;
+    @ViewChild('paginator', {static: true}) paginator: Paginator;
 
     advancedFiltersAreShown = false;
     filterText = '';
@@ -138,6 +138,6 @@ export class PollsComponent extends AppComponentBase {
         this._votesServiceProxy.createOrEdit(requestItem).subscribe((res)=>{
             // this.reloadPage();
            
-          }) 
+          });
     }
 }
