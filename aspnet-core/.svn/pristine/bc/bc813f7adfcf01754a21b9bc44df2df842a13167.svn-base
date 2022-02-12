@@ -1,9 +1,0 @@
-namespace ERP.GLCostCenter.Dtos
-{
-    public class GetGLCstCentForViewDto
-    {
-		public GLCstCentDto GLCstCent { get; set; }
-
-
-    }
-}
