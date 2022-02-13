@@ -6,6 +6,11 @@ namespace ERP.Authorization
     /// </summary>
     public static class AppPermissions
     {
+        public const string Pages_Comments = "Pages.Comments";
+        public const string Pages_Comments_Create = "Pages.Comments.Create";
+        public const string Pages_Comments_Edit = "Pages.Comments.Edit";
+        public const string Pages_Comments_Delete = "Pages.Comments.Delete";
+
         public const string Pages_Votes = "Pages.Votes";
         public const string Pages_Votes_Create = "Pages.Votes.Create";
         public const string Pages_Votes_Edit = "Pages.Votes.Edit";

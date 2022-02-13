@@ -30,6 +30,13 @@ namespace ERP.Authorization
 
             var pages = context.GetPermissionOrNull(AppPermissions.Pages) ?? context.CreatePermission(AppPermissions.Pages, L("Pages"));
 
+            var comments = pages.CreateChildPermission(AppPermissions.Pages_Comments, L("Comments"), multiTenancySides: MultiTenancySides.Host);
+            comments.CreateChildPermission(AppPermissions.Pages_Comments_Create, L("CreateNewComment"), multiTenancySides: MultiTenancySides.Host);
+            comments.CreateChildPermission(AppPermissions.Pages_Comments_Edit, L("EditComment"), multiTenancySides: MultiTenancySides.Host);
+            comments.CreateChildPermission(AppPermissions.Pages_Comments_Delete, L("DeleteComment"), multiTenancySides: MultiTenancySides.Host);
+
+
+
             var votes = pages.CreateChildPermission(AppPermissions.Pages_Votes, L("Votes"), multiTenancySides: MultiTenancySides.Host);
             votes.CreateChildPermission(AppPermissions.Pages_Votes_Create, L("CreateNewVote"), multiTenancySides: MultiTenancySides.Host);
             votes.CreateChildPermission(AppPermissions.Pages_Votes_Edit, L("EditVote"), multiTenancySides: MultiTenancySides.Host);

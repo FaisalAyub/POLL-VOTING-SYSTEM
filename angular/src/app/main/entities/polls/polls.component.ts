@@ -1,6 +1,6 @@
 import { Component, Injector, ViewEncapsulation, ViewChild, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PollsServiceProxy, PollDto, VotesServiceProxy, CreateOrEditVoteDto  } from '@shared/service-proxies/service-proxies';
+import { PollsServiceProxy, PollDto, VotesServiceProxy, CreateOrEditVoteDto, CommentsServiceProxy  } from '@shared/service-proxies/service-proxies';
 import { NotifyService } from '@abp/notify/notify.service';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { TokenAuthServiceProxy } from '@shared/service-proxies/service-proxies';
@@ -45,6 +45,7 @@ export class PollsComponent extends AppComponentBase {
         injector: Injector,
         private _pollsServiceProxy: PollsServiceProxy,
         private _votesServiceProxy: VotesServiceProxy,
+        private _commentsServiceProxy: CommentsServiceProxy,
         private _notifyService: NotifyService,
         private _tokenAuth: TokenAuthServiceProxy,
         private _activatedRoute: ActivatedRoute,
@@ -139,5 +140,24 @@ export class PollsComponent extends AppComponentBase {
             // this.reloadPage();
            
           });
+    }
+
+    message:any='';
+    sendMessage(value,pollId){
+        console.log(value + pollId);
+        let item:any={pollId:pollId,text:value};
+        this._commentsServiceProxy.createOrEdit(item).subscribe((res)=>{
+            console.log(res);
+        })
+    }
+    comments:any=[];
+    pollId:any=0;
+    getComments(pollId){ 
+        this._commentsServiceProxy.getAll('','','','',pollId,'',0,10).subscribe((res)=>{
+          this.comments= res.items;
+          if(this.comments.length>0){
+            this.pollId=pollId;
+          }
+        })
     }
 }

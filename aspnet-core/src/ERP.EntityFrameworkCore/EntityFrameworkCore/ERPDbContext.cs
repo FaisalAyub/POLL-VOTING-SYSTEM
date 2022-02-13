@@ -16,6 +16,8 @@ namespace ERP.EntityFrameworkCore
 {
     public class ERPDbContext : AbpZeroDbContext<Tenant, Role, User, ERPDbContext>, IAbpPersistedGrantDbContext
     {
+        public virtual DbSet<Comment> Comments { get; set; }
+
         public virtual DbSet<Vote> Votes { get; set; }
 
         public virtual DbSet<Poll> Polls { get; set; }

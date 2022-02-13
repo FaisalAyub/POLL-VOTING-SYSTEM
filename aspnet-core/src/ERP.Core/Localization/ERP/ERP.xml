@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <localizationDictionary culture="en">
-  <texts>    <text name="count1">count 1</text>
+  <texts>    <text name="Comment">Comment</text>
+    <text name="CreateNewComment">Create new comment</text>
+    <text name="EditComment">Edit comment</text>
+    <text name="DeleteComment">Delete comment</text>
+    <text name="count1">count 1</text>
     <text name="count2">count 2</text>
     <text name="count3">count 3</text>
     <text name="count4">count 4</text>

@@ -53,7 +53,7 @@ export class UserLookupTableModalComponent extends AppComponentBase {
         this.primengTableHelper.showLoadingIndicator();
 
         this._pollsServiceProxy.getAllUserForLookupTable(
-            this.filterText,
+            this.filterText,0,
             this.primengTableHelper.getSorting(this.dataTable),
             this.primengTableHelper.getSkipCount(this.paginator, event),
             this.primengTableHelper.getMaxResultCount(this.paginator, event)

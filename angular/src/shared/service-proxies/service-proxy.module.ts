@@ -7,6 +7,7 @@ import * as ApiServiceProxies from './service-proxies';
     providers: [
         ApiServiceProxies.PollsServiceProxy,        
         ApiServiceProxies.VotesServiceProxy,        
+        ApiServiceProxies.CommentsServiceProxy,        
         // ApiServiceProxies.GLACGRPServiceProxy,        
         // ApiServiceProxies.GLCstCentServiceProxy,        
         // ApiServiceProxies.GLBOOKSServiceProxy,        
