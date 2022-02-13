@@ -26,7 +26,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { BsDatepickerModule, BsDatepickerConfig, BsDaterangepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { NgxBootstrapDatePickerConfigService } from 'assets/ngx-bootstrap/ngx-bootstrap-datepicker-config.service';
 import { from } from 'rxjs';
-import { UserLookupTableModalComponent } from './entities/polls/user-lookup-table-modal.component';
+import { UserLookupTableModalComponent } from './entities/directMessages/user-lookup-table-modal.component';
 
 NgxBootstrapDatePickerConfigService.registerNgxBootstrapDatePickerLocales();
 
@@ -58,7 +58,7 @@ NgxBootstrapDatePickerConfigService.registerNgxBootstrapDatePickerLocales();
     UserLookupTableModalComponent,
 		PollsComponent,
 		ViewPollModalComponent,		CreateOrEditPollModalComponent, 
-        DashboardComponent,UserLookupTableModalComponent
+        DashboardComponent
     ],
     providers: [
         { provide: BsDatepickerConfig, useFactory: NgxBootstrapDatePickerConfigService.getDatepickerConfig },
