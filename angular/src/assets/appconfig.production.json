@@ -1,6 +1,6 @@
 {
-  "remoteServiceBaseUrl": "http://localhost:22742",
-  "appBaseUrl": "http://localhost:4200",
+  "remoteServiceBaseUrl": "https://test-web-app-4.azurewebsites.net/",
+  "appBaseUrl": "https://pollingtest.z13.web.core.windows.net/",
   "localeMappings": {
     "angular": [
       {
