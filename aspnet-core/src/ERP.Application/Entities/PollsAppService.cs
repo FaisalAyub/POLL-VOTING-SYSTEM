@@ -69,8 +69,10 @@ namespace ERP.Entities
                                 count3 = o.count3,
                                 count4 = o.count4,
                                 Id = o.Id,
-                                UserId=o.UserId
+                                UserId=o.UserId,
+                                
                             },
+                            
                          	UserName = s1 == null ? "" : s1.Name.ToString()
 						};
 

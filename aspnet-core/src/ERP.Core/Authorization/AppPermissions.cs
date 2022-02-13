@@ -6,6 +6,11 @@ namespace ERP.Authorization
     /// </summary>
     public static class AppPermissions
     {
+        public const string Pages_DirectMessages = "Pages.DirectMessages";
+        public const string Pages_DirectMessages_Create = "Pages.DirectMessages.Create";
+        public const string Pages_DirectMessages_Edit = "Pages.DirectMessages.Edit";
+        public const string Pages_DirectMessages_Delete = "Pages.DirectMessages.Delete";
+
         public const string Pages_Comments = "Pages.Comments";
         public const string Pages_Comments_Create = "Pages.Comments.Create";
         public const string Pages_Comments_Edit = "Pages.Comments.Edit";

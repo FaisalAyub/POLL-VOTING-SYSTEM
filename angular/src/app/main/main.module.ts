@@ -2,6 +2,10 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppCommonModule } from '@app/shared/common/app-common.module';
+import { DirectMessagesComponent } from './entities/directMessages/directMessages.component';
+import { ViewDirectMessageModalComponent } from './entities/directMessages/view-directMessage-modal.component';
+import { CreateOrEditDirectMessageModalComponent } from './entities/directMessages/create-or-edit-directMessage-modal.component';
+
 import { PollsComponent } from './entities/polls/polls.component';
 import { ViewPollModalComponent } from './entities/polls/view-poll-modal.component';
 import { CreateOrEditPollModalComponent } from './entities/polls/create-or-edit-poll-modal.component';
@@ -49,6 +53,9 @@ NgxBootstrapDatePickerConfigService.registerNgxBootstrapDatePickerLocales();
         PopoverModule.forRoot()
     ],
     declarations: [
+		DirectMessagesComponent,
+		ViewDirectMessageModalComponent,		CreateOrEditDirectMessageModalComponent,
+    UserLookupTableModalComponent,
 		PollsComponent,
 		ViewPollModalComponent,		CreateOrEditPollModalComponent, 
         DashboardComponent,UserLookupTableModalComponent

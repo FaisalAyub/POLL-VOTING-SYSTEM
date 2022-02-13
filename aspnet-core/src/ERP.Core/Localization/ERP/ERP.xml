@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <localizationDictionary culture="en">
-  <texts>    <text name="Comment">Comment</text>
+  <texts>    <text name="DirectMessage">Direct message</text>
+    <text name="text">text</text>
+    <text name="DirectMessagesHeaderInfo">Direct messages header info</text>
+    <text name="CreateNewDirectMessage">Create new direct message</text>
+    <text name="EditDirectMessage">Edit direct message</text>
+    <text name="DeleteDirectMessage">Delete direct message</text>
+    <text name="DirectMessages">Direct messages</text>
+    <text name="Comment">Comment</text>
     <text name="CreateNewComment">Create new comment</text>
     <text name="EditComment">Edit comment</text>
     <text name="DeleteComment">Delete comment</text>

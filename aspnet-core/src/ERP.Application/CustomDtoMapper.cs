@@ -43,6 +43,8 @@ namespace ERP
     {
         public static void CreateMappings(IMapperConfigurationExpression configuration)
         {
+           configuration.CreateMap<CreateOrEditDirectMessageDto, DirectMessage>();
+           configuration.CreateMap<DirectMessage, DirectMessageDto>();
            configuration.CreateMap<CreateOrEditCommentDto, Comment>();
            configuration.CreateMap<Comment, CommentDto>();
            configuration.CreateMap<CreateOrEditVoteDto, Vote>();

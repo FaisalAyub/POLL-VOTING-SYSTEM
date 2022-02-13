@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { DirectMessagesComponent } from './entities/directMessages/directMessages.component';
 import { PollsComponent } from './entities/polls/polls.component'; 
 import { DashboardComponent } from './dashboard/dashboard.component';
 
@@ -9,6 +10,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
             {
                 path: '',
                 children: [
+                    { path: 'entities/directMessages', component: DirectMessagesComponent, data: { permission: 'Pages.DirectMessages' }  },
                     { path: 'entities/polls', component: PollsComponent, data: { permission: 'Pages.Polls' }  },
                     // { path: 'accountGroup/glacgrp', component: GLACGRPComponent, data: { permission: 'Pages.GLACGRP' }  },
                     // { path: 'glCostCenter/glCstCent', component: GLCstCentComponent, data: { permission: 'Pages.GLCstCent' }  },

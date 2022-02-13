@@ -5,6 +5,5 @@ namespace ERP.Entities.Dtos
     public class GetAllForLookupTableInput : PagedAndSortedResultRequestDto
     {
 		public string Filter { get; set; }
-        public int PollId { get; set; }
     }
 }

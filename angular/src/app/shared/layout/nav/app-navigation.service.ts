@@ -33,6 +33,8 @@ export class AppNavigationService {
             // new AppMenuItem('GLACGRP', 'Pages.GLACGRP', 'flaticon-more', '/app/main/accountGroup/glacgrp'),
             
             new AppMenuItem('Polls', 'Pages.Polls', 'flaticon-more', '/app/main/entities/polls'),
+            // 
+            new AppMenuItem('DirectMessages', 'Pages.DirectMessages', 'flaticon-more', '/app/main/entities/directMessages'),
             //  new AppMenuItem('Administration', '', 'flaticon-interface-8', '', [
             //     new AppMenuItem('OrganizationUnits', 'Pages.Administration.OrganizationUnits', 'flaticon-map', '/app/admin/organization-units'),
             //     new AppMenuItem('Roles', 'Pages.Administration.Roles', 'flaticon-suitcase', '/app/admin/roles'),
@@ -46,7 +48,7 @@ export class AppNavigationService {
             //     new AppMenuItem('Settings', 'Pages.Administration.Tenant.Settings', 'flaticon-settings', '/app/admin/tenantSettings')
             // ]),
             // new AppMenuItem('DemoUiComponents', 'Pages.DemoUiComponents', 'flaticon-shapes', '/app/admin/demo-ui-components')
-        ]);
+        ],)
     }
 
     checkChildMenuItemPermission(menuItem): boolean {

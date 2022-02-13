@@ -13,6 +13,7 @@ import { LazyLoadEvent } from 'primeng/components/common/lazyloadevent';
 import { FileDownloadService } from '@shared/utils/file-download.service';
 import * as _ from 'lodash';
 import * as moment from 'moment';
+import { CreateOrEditDirectMessageModalComponent } from '../directMessages/create-or-edit-directMessage-modal.component';
 
 @Component({
     templateUrl: './polls.component.html', 
@@ -28,6 +29,7 @@ export class PollsComponent extends AppComponentBase {
     @ViewChild('viewPollModalComponent', {static: true}) viewPollModal: ViewPollModalComponent;
     @ViewChild('dataTable', {static: true}) dataTable: Table;
     @ViewChild('paginator', {static: true}) paginator: Paginator;
+    @ViewChild('createOrEditDirectMessageModal', {static: true}) createOrEditDirectMessageModal: CreateOrEditDirectMessageModalComponent;
 
     advancedFiltersAreShown = false;
     filterText = '';
@@ -52,6 +54,10 @@ export class PollsComponent extends AppComponentBase {
         private _fileDownloadService: FileDownloadService
     ) {
         super(injector);
+    }
+
+    createDirectMessage(userId): void {
+        this.createOrEditDirectMessageModal.show(null,userId);
     }
 
     getPolls(event?: LazyLoadEvent) {
@@ -125,30 +131,33 @@ export class PollsComponent extends AppComponentBase {
       let item=  this.primengTableHelper.records.find(x=>x.poll.id==record.poll.id);
       if(item){
           item.poll.checkedOption=checkedOption;
-          if(checkedOption==1){
-              item.poll.count1+=1;
-          }else if(checkedOption==2){
-            item.poll.count2+=1;
-            }else if(checkedOption==3){
-                item.poll.count3+=1;
-            }else if(checkedOption==4){
-                item.poll.count4+=1;
-            }
+        //   if(checkedOption==1){
+        //       item.poll.count1+=1;
+        //   }else if(checkedOption==2){
+        //     item.poll.count2+=1;
+        //     }else if(checkedOption==3){
+        //         item.poll.count3+=1;
+        //     }else if(checkedOption==4){
+        //         item.poll.count4+=1;
+        //     }
       }
       let requestItem:any={pollId:record.poll.id,selectedOption:checkedOption};
         this._votesServiceProxy.createOrEdit(requestItem).subscribe((res)=>{
             // this.reloadPage();
+            this.notify.info('Vote casted successfully');
            
           });
     }
 
     message:any='';
-    sendMessage(value,pollId){
-        console.log(value + pollId);
-        let item:any={pollId:pollId,text:value};
+    sendMessage(pollId){
+        if(this.message){
+        let item:any={pollId:pollId,text:this.message};
         this._commentsServiceProxy.createOrEdit(item).subscribe((res)=>{
-            console.log(res);
+            this.notify.info('Comment added successfully');
+            this.message='';
         })
+    }
     }
     comments:any=[];
     pollId:any=0;

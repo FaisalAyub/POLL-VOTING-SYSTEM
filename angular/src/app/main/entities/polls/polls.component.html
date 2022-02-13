@@ -1,6 +1,6 @@
 <div [@routerTransition] class="poll-component">
     <div class="m-subheader">
-        <div class="kt-subheader kt-grid__item">
+        <div class="kt-subheader kt-grid__item container">
             <div class="mr-auto col-md-6">
                 <h3 class="m-subheader__title m-subheader__title--separator">
                     <span>{{l("Polls")}}</span>
@@ -10,7 +10,7 @@
                 </span>
             </div>
             <div class="col-md-6 text-right">
-				<button (click)="exportToExcel()" class="btn btn-outline-success"><i class="fa fa-file-excel"></i> {{l("ExportToExcel")}}</button>
+				<!-- <button (click)="exportToExcel()" class="btn btn-outline-success"><i class="fa fa-file-excel"></i> {{l("ExportToExcel")}}</button> -->
                 <button *ngIf="isGranted('Pages.Polls.Create')" (click)="createPoll()" 
 			class="btn btn-primary blue"><i class="fa fa-plus"></i> {{l("CreateNewPoll")}}</button>
             </div>
@@ -127,9 +127,11 @@
                                     <div class="kt-portlet kt-portlet--mobile">
                                         <div class="kt-portlet__body">
                                             <div class="row">
-                                                <div class="col-12"><img alt="Pic" class="header-profile-picture m--img-rounded m--marginless m--img-centered" src="http://localhost:4200/assets/common/images/default-profile-picture.png" style=""> 
+                                                <div class="col-12"><img alt="Pic" class="header-profile-picture m--img-rounded m--marginless m--img-centered" src="/assets/common/images/default-profile-picture.png" style=""> 
                                                     &nbsp; &nbsp; <span class="m-section__sub"> 
                                                         <b>{{record?.userName}}</b> &nbsp; <label style="font-size: 13px; opacity: 0.6;">created a poll</label> </span>
+                                                        <button class="btn btn-brand btn-md  btn-font-sm btn-upper btn-bold kt-chat__reply" (click)="createDirectMessage(record?.poll.userId)" id="SendChatMessageButton" type="button" style="text-align: right;float: right;">Message</button>
+                                                    
                                                     </div>
                                             </div>
                                             <div class="row">
@@ -183,9 +185,9 @@
                                             </div>
                                             <div class="kt-chat__input container " id="ChatMessageWrapper"><div class="kt-chat__editor  col-6" style="padding-left: 50px;">
                                             <textarea class="kt-messenger__forkt-input col-10" id="ChatMessage" maxlength="4096" name="message" 
-                                             placeholder="Write a public comment" required="" #message type="text" style="width: 100%;"></textarea>                                            
+                                             placeholder="Write a public comment" required="" [(ngModel)]="message" type="text" style="width: 100%;"></textarea>                                            
                                             
-                                             <button class="btn btn-brand btn-md  btn-font-sm btn-upper btn-bold kt-chat__reply" (click)="sendMessage(message.value,record?.poll.id)" id="SendChatMessageButton" type="button" style="text-align: right;float: right;">Send</button></div></div>
+                                             <button class="btn btn-brand btn-md  btn-font-sm btn-upper btn-bold kt-chat__reply" (click)="sendMessage(record?.poll.id)" id="SendChatMessageButton" type="button" style="text-align: right;float: right;">Send</button></div></div>
                                             </div> 
                                             <div *ngIf="comments?.length>0 && pollId==record?.poll?.id">
                                                 <div class="row" style="padding-left: 90px;margin-top: 20px;" *ngFor="let item of comments" >
@@ -274,5 +276,6 @@
 
     <createOrEditPollModal #createOrEditPollModal (modalSave)="getPolls()"></createOrEditPollModal>
     <viewPollModal #viewPollModal></viewPollModal>
+    <createOrEditDirectMessageModal #createOrEditDirectMessageModal ></createOrEditDirectMessageModal>
     
 </div>

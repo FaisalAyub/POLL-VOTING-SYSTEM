@@ -30,6 +30,13 @@ namespace ERP.Authorization
 
             var pages = context.GetPermissionOrNull(AppPermissions.Pages) ?? context.CreatePermission(AppPermissions.Pages, L("Pages"));
 
+            var directMessages = pages.CreateChildPermission(AppPermissions.Pages_DirectMessages, L("DirectMessages"), multiTenancySides: MultiTenancySides.Host);
+            directMessages.CreateChildPermission(AppPermissions.Pages_DirectMessages_Create, L("CreateNewDirectMessage"), multiTenancySides: MultiTenancySides.Host);
+            directMessages.CreateChildPermission(AppPermissions.Pages_DirectMessages_Edit, L("EditDirectMessage"), multiTenancySides: MultiTenancySides.Host);
+            directMessages.CreateChildPermission(AppPermissions.Pages_DirectMessages_Delete, L("DeleteDirectMessage"), multiTenancySides: MultiTenancySides.Host);
+
+
+
             var comments = pages.CreateChildPermission(AppPermissions.Pages_Comments, L("Comments"), multiTenancySides: MultiTenancySides.Host);
             comments.CreateChildPermission(AppPermissions.Pages_Comments_Create, L("CreateNewComment"), multiTenancySides: MultiTenancySides.Host);
             comments.CreateChildPermission(AppPermissions.Pages_Comments_Edit, L("EditComment"), multiTenancySides: MultiTenancySides.Host);

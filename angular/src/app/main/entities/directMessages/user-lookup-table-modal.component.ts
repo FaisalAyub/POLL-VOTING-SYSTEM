@@ -1,6 +1,6 @@
 import { Component, ViewChild, Injector, Output, EventEmitter, ViewEncapsulation} from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
-import {PollsServiceProxy, PollUserLookupTableDto } from '@shared/service-proxies/service-proxies';
+import {DirectMessagesServiceProxy, DirectMessageUserLookupTableDto } from '@shared/service-proxies/service-proxies';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { Table } from 'primeng/components/table/table';
 import { Paginator } from 'primeng/components/paginator/paginator';
@@ -28,7 +28,7 @@ export class UserLookupTableModalComponent extends AppComponentBase {
 
     constructor(
         injector: Injector,
-        private _pollsServiceProxy: PollsServiceProxy
+        private _directMessagesServiceProxy: DirectMessagesServiceProxy
     ) {
         super(injector);
     }
@@ -52,7 +52,7 @@ export class UserLookupTableModalComponent extends AppComponentBase {
 
         this.primengTableHelper.showLoadingIndicator();
 
-        this._pollsServiceProxy.getAllUserForLookupTable(
+        this._directMessagesServiceProxy.getAllUserForLookupTable(
             this.filterText,
             this.primengTableHelper.getSorting(this.dataTable),
             this.primengTableHelper.getSkipCount(this.paginator, event),
@@ -68,7 +68,7 @@ export class UserLookupTableModalComponent extends AppComponentBase {
         this.paginator.changePage(this.paginator.getPage());
     }
 
-    setAndSave(user: PollUserLookupTableDto) {
+    setAndSave(user: DirectMessageUserLookupTableDto) {
         this.id = user.id;
         this.displayName = user.displayName;
         this.active = false;
