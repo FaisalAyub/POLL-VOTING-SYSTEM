@@ -1,3 +1,4 @@
+using ERP.Authorization.Users;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -21,5 +22,10 @@ namespace ERP.Entities
 		public virtual string Option4 { get; set; }
 		
 
+		public virtual long? UserId { get; set; }
+		
+        [ForeignKey("UserId")]
+		public User UserFk { get; set; }
+		
     }
 }

@@ -17,5 +17,8 @@ namespace ERP.Entities.Dtos
 		public string Option4 { get; set; }
 
 
+		 public long? UserId { get; set; }
+
+		 
     }
 }

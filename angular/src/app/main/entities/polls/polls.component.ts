@@ -34,6 +34,7 @@ export class PollsComponent extends AppComponentBase {
     option2Filter = '';
     option3Filter = '';
     option4Filter = '';
+        userNameFilter = '';
 
 
 
@@ -64,6 +65,7 @@ export class PollsComponent extends AppComponentBase {
             this.option2Filter,
             this.option3Filter,
             this.option4Filter,
+            this.userNameFilter,
             this.primengTableHelper.getSorting(this.dataTable),
             this.primengTableHelper.getSkipCount(this.paginator, event),
             this.primengTableHelper.getMaxResultCount(this.paginator, event)
@@ -105,6 +107,7 @@ export class PollsComponent extends AppComponentBase {
             this.option2Filter,
             this.option3Filter,
             this.option4Filter,
+            this.userNameFilter,
         )
         .subscribe(result => {
             this._fileDownloadService.downloadTempFile(result);

@@ -4,6 +4,8 @@ namespace ERP.Entities.Dtos
     {
 		public PollDto Poll { get; set; }
 
+		public string UserName { get; set;}
+
 
     }
 }

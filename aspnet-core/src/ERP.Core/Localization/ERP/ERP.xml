@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <localizationDictionary culture="en">
-  <texts>    <text name="Entities">Entities</text>
+  <texts>    <text name="PickUser">Pick user</text>
+    <text name="Entities">Entities</text>
     <text name="Poll">Poll</text>
     <text name="Title">Title</text>
     <text name="Option1">Option 1</text>

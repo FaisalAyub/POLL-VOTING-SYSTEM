@@ -22,5 +22,7 @@ namespace ERP.Entities
 		Task<FileDto> GetPollsToExcel(GetAllPollsForExcelInput input);
 
 		
+		Task<PagedResultDto<PollUserLookupTableDto>> GetAllUserForLookupTable(GetAllForLookupTableInput input);
+		
     }
 }

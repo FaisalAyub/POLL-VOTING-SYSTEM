@@ -8,6 +8,8 @@ namespace ERP.Entities.Dtos
     {
 		public CreateOrEditPollDto Poll { get; set; }
 
+		public string UserName { get; set;}
+
 
     }
 }

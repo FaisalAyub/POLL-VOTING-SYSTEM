@@ -1,3 +1,4 @@
+using ERP.Authorization.Users;
 
 
 using System;
@@ -23,31 +24,38 @@ namespace ERP.Entities
     {
 		 private readonly IRepository<Poll> _pollRepository;
 		 private readonly IPollsExcelExporter _pollsExcelExporter;
+		 private readonly IRepository<User,long> _lookup_userRepository;
 		 
 
-		  public PollsAppService(IRepository<Poll> pollRepository, IPollsExcelExporter pollsExcelExporter ) 
+		  public PollsAppService(IRepository<Poll> pollRepository, IPollsExcelExporter pollsExcelExporter , IRepository<User, long> lookup_userRepository) 
 		  {
 			_pollRepository = pollRepository;
 			_pollsExcelExporter = pollsExcelExporter;
-			
+			_lookup_userRepository = lookup_userRepository;
+		
 		  }
 
 		 public async Task<PagedResultDto<GetPollForViewDto>> GetAll(GetAllPollsInput input)
          {
 			
 			var filteredPolls = _pollRepository.GetAll()
+						.Include( e => e.UserFk)
 						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Title.Contains(input.Filter) || e.Option1.Contains(input.Filter) || e.Option2.Contains(input.Filter) || e.Option3.Contains(input.Filter) || e.Option4.Contains(input.Filter))
 						.WhereIf(!string.IsNullOrWhiteSpace(input.TitleFilter),  e => e.Title.ToLower() == input.TitleFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.Option1Filter),  e => e.Option1.ToLower() == input.Option1Filter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.Option2Filter),  e => e.Option2.ToLower() == input.Option2Filter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.Option3Filter),  e => e.Option3.ToLower() == input.Option3Filter.ToLower().Trim())
-						.WhereIf(!string.IsNullOrWhiteSpace(input.Option4Filter),  e => e.Option4.ToLower() == input.Option4Filter.ToLower().Trim());
+						.WhereIf(!string.IsNullOrWhiteSpace(input.Option4Filter),  e => e.Option4.ToLower() == input.Option4Filter.ToLower().Trim())
+						.WhereIf(!string.IsNullOrWhiteSpace(input.UserNameFilter), e => e.UserFk != null && e.UserFk.Name.ToLower() == input.UserNameFilter.ToLower().Trim());
 
 			var pagedAndFilteredPolls = filteredPolls
                 .OrderBy(input.Sorting ?? "id asc")
                 .PageBy(input);
 
 			var polls = from o in pagedAndFilteredPolls
+                         join o1 in _lookup_userRepository.GetAll() on o.UserId equals o1.Id into j1
+                         from s1 in j1.DefaultIfEmpty()
+                         
                          select new GetPollForViewDto() {
 							Poll = new PollDto
 							{
@@ -56,8 +64,10 @@ namespace ERP.Entities
                                 Option2 = o.Option2,
                                 Option3 = o.Option3,
                                 Option4 = o.Option4,
-                                Id = o.Id,								
-							}
+                                Id = o.Id,
+                                UserId=o.UserId
+                            },
+                         	UserName = s1 == null ? "" : s1.Name.ToString()
 						};
 
             var totalCount = await filteredPolls.CountAsync();
@@ -73,6 +83,12 @@ namespace ERP.Entities
             var poll = await _pollRepository.GetAsync(id);
 
             var output = new GetPollForViewDto { Poll = ObjectMapper.Map<PollDto>(poll) };
+
+		    if (output.Poll.UserId != null)
+            {
+                var _lookupUser = await _lookup_userRepository.FirstOrDefaultAsync((long)output.Poll.UserId);
+                output.UserName = _lookupUser.Name.ToString();
+            }
 			
             return output;
          }
@@ -83,13 +99,20 @@ namespace ERP.Entities
             var poll = await _pollRepository.FirstOrDefaultAsync(input.Id);
            
 		    var output = new GetPollForEditOutput {Poll = ObjectMapper.Map<CreateOrEditPollDto>(poll)};
+
+		    if (output.Poll.UserId != null)
+            {
+                var _lookupUser = await _lookup_userRepository.FirstOrDefaultAsync((long)output.Poll.UserId);
+                output.UserName = _lookupUser.Name.ToString();
+            }
 			
             return output;
          }
 
 		 public async Task CreateOrEdit(CreateOrEditPollDto input)
          {
-            if(input.Id == null){
+            input.UserId = Convert.ToInt32(AbpSession.UserId);
+            if (input.Id == null){
 				await Create(input);
 			}
 			else{
@@ -100,6 +123,7 @@ namespace ERP.Entities
 		 [AbpAuthorize(AppPermissions.Pages_Polls_Create)]
 		 private async Task Create(CreateOrEditPollDto input)
          {
+           
             var poll = ObjectMapper.Map<Poll>(input);
 
 			
@@ -124,14 +148,19 @@ namespace ERP.Entities
          {
 			
 			var filteredPolls = _pollRepository.GetAll()
+						.Include( e => e.UserFk)
 						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Title.Contains(input.Filter) || e.Option1.Contains(input.Filter) || e.Option2.Contains(input.Filter) || e.Option3.Contains(input.Filter) || e.Option4.Contains(input.Filter))
 						.WhereIf(!string.IsNullOrWhiteSpace(input.TitleFilter),  e => e.Title.ToLower() == input.TitleFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.Option1Filter),  e => e.Option1.ToLower() == input.Option1Filter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.Option2Filter),  e => e.Option2.ToLower() == input.Option2Filter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.Option3Filter),  e => e.Option3.ToLower() == input.Option3Filter.ToLower().Trim())
-						.WhereIf(!string.IsNullOrWhiteSpace(input.Option4Filter),  e => e.Option4.ToLower() == input.Option4Filter.ToLower().Trim());
+						.WhereIf(!string.IsNullOrWhiteSpace(input.Option4Filter),  e => e.Option4.ToLower() == input.Option4Filter.ToLower().Trim())
+						.WhereIf(!string.IsNullOrWhiteSpace(input.UserNameFilter), e => e.UserFk != null && e.UserFk.Name.ToLower() == input.UserNameFilter.ToLower().Trim());
 
 			var query = (from o in filteredPolls
+                         join o1 in _lookup_userRepository.GetAll() on o.UserId equals o1.Id into j1
+                         from s1 in j1.DefaultIfEmpty()
+                         
                          select new GetPollForViewDto() { 
 							Poll = new PollDto
 							{
@@ -141,7 +170,8 @@ namespace ERP.Entities
                                 Option3 = o.Option3,
                                 Option4 = o.Option4,
                                 Id = o.Id
-							}
+							},
+                         	UserName = s1 == null ? "" : s1.Name.ToString()
 						 });
 
 
@@ -151,5 +181,34 @@ namespace ERP.Entities
          }
 
 
+
+		[AbpAuthorize(AppPermissions.Pages_Polls)]
+         public async Task<PagedResultDto<PollUserLookupTableDto>> GetAllUserForLookupTable(GetAllForLookupTableInput input)
+         {
+             var query = _lookup_userRepository.GetAll().WhereIf(
+                    !string.IsNullOrWhiteSpace(input.Filter),
+                   e=> e.Name.ToString().Contains(input.Filter)
+                );
+
+            var totalCount = await query.CountAsync();
+
+            var userList = await query
+                .PageBy(input)
+                .ToListAsync();
+
+			var lookupTableDtoList = new List<PollUserLookupTableDto>();
+			foreach(var user in userList){
+				lookupTableDtoList.Add(new PollUserLookupTableDto
+				{
+					Id = user.Id,
+					DisplayName = user.Name?.ToString()
+				});
+			}
+
+            return new PagedResultDto<PollUserLookupTableDto>(
+                totalCount,
+                lookupTableDtoList
+            );
+         }
     }
 }

@@ -18,6 +18,8 @@ namespace ERP.Entities.Dtos
 		public string Option4Filter { get; set; }
 
 
+		 public string UserNameFilter { get; set; }
 
+		 
     }
 }

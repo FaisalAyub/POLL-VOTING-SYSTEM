@@ -39,7 +39,8 @@ namespace ERP.Entities.Exporting
                         L("Option1"),
                         L("Option2"),
                         L("Option3"),
-                        L("Option4")
+                        L("Option4"),
+                        (L("User")) + L("Name")
                         );
 
                     AddObjects(
@@ -48,7 +49,8 @@ namespace ERP.Entities.Exporting
                         _ => _.Poll.Option1,
                         _ => _.Poll.Option2,
                         _ => _.Poll.Option3,
-                        _ => _.Poll.Option4
+                        _ => _.Poll.Option4,
+                        _ => _.UserName
                         );
 
 					

@@ -5654,12 +5654,13 @@ export class PollsServiceProxy {
      * @param option2Filter (optional) 
      * @param option3Filter (optional) 
      * @param option4Filter (optional) 
+     * @param userNameFilter (optional) 
      * @param sorting (optional) 
      * @param skipCount (optional) 
      * @param maxResultCount (optional) 
      * @return Success
      */
-    getAll(filter: string | null | undefined, titleFilter: string | null | undefined, option1Filter: string | null | undefined, option2Filter: string | null | undefined, option3Filter: string | null | undefined, option4Filter: string | null | undefined, sorting: string | null | undefined, skipCount: number | null | undefined, maxResultCount: number | null | undefined): Observable<PagedResultDtoOfGetPollForViewDto> {
+    getAll(filter: string | null | undefined, titleFilter: string | null | undefined, option1Filter: string | null | undefined, option2Filter: string | null | undefined, option3Filter: string | null | undefined, option4Filter: string | null | undefined, userNameFilter: string | null | undefined, sorting: string | null | undefined, skipCount: number | null | undefined, maxResultCount: number | null | undefined): Observable<PagedResultDtoOfGetPollForViewDto> {
         let url_ = this.baseUrl + "/api/services/app/Polls/GetAll?";
         if (filter !== undefined)
             url_ += "Filter=" + encodeURIComponent("" + filter) + "&"; 
@@ -5673,6 +5674,8 @@ export class PollsServiceProxy {
             url_ += "Option3Filter=" + encodeURIComponent("" + option3Filter) + "&"; 
         if (option4Filter !== undefined)
             url_ += "Option4Filter=" + encodeURIComponent("" + option4Filter) + "&"; 
+        if (userNameFilter !== undefined)
+            url_ += "UserNameFilter=" + encodeURIComponent("" + userNameFilter) + "&"; 
         if (sorting !== undefined)
             url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
         if (skipCount !== undefined)
@@ -5942,9 +5945,10 @@ export class PollsServiceProxy {
      * @param option2Filter (optional) 
      * @param option3Filter (optional) 
      * @param option4Filter (optional) 
+     * @param userNameFilter (optional) 
      * @return Success
      */
-    getPollsToExcel(filter: string | null | undefined, titleFilter: string | null | undefined, option1Filter: string | null | undefined, option2Filter: string | null | undefined, option3Filter: string | null | undefined, option4Filter: string | null | undefined): Observable<FileDto> {
+    getPollsToExcel(filter: string | null | undefined, titleFilter: string | null | undefined, option1Filter: string | null | undefined, option2Filter: string | null | undefined, option3Filter: string | null | undefined, option4Filter: string | null | undefined, userNameFilter: string | null | undefined): Observable<FileDto> {
         let url_ = this.baseUrl + "/api/services/app/Polls/GetPollsToExcel?";
         if (filter !== undefined)
             url_ += "Filter=" + encodeURIComponent("" + filter) + "&"; 
@@ -5958,6 +5962,8 @@ export class PollsServiceProxy {
             url_ += "Option3Filter=" + encodeURIComponent("" + option3Filter) + "&"; 
         if (option4Filter !== undefined)
             url_ += "Option4Filter=" + encodeURIComponent("" + option4Filter) + "&"; 
+        if (userNameFilter !== undefined)
+            url_ += "UserNameFilter=" + encodeURIComponent("" + userNameFilter) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -6002,6 +6008,69 @@ export class PollsServiceProxy {
             }));
         }
         return _observableOf<FileDto>(<any>null);
+    }
+
+    /**
+     * @param filter (optional) 
+     * @param sorting (optional) 
+     * @param skipCount (optional) 
+     * @param maxResultCount (optional) 
+     * @return Success
+     */
+    getAllUserForLookupTable(filter: string | null | undefined, sorting: string | null | undefined, skipCount: number | null | undefined, maxResultCount: number | null | undefined): Observable<PagedResultDtoOfPollUserLookupTableDto> {
+        let url_ = this.baseUrl + "/api/services/app/Polls/GetAllUserForLookupTable?";
+        if (filter !== undefined)
+            url_ += "Filter=" + encodeURIComponent("" + filter) + "&"; 
+        if (sorting !== undefined)
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
+        if (skipCount !== undefined)
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+        if (maxResultCount !== undefined)
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAllUserForLookupTable(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAllUserForLookupTable(<any>response_);
+                } catch (e) {
+                    return <Observable<PagedResultDtoOfPollUserLookupTableDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<PagedResultDtoOfPollUserLookupTableDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetAllUserForLookupTable(response: HttpResponseBase): Observable<PagedResultDtoOfPollUserLookupTableDto> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? PagedResultDtoOfPollUserLookupTableDto.fromJS(resultData200) : new PagedResultDtoOfPollUserLookupTableDto();
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<PagedResultDtoOfPollUserLookupTableDto>(<any>null);
     }
 }
 
@@ -16614,6 +16683,7 @@ export interface IPagedResultDtoOfGetPollForViewDto {
 
 export class GetPollForViewDto implements IGetPollForViewDto {
     poll!: PollDto | undefined;
+    userName!: string | undefined;
 
     constructor(data?: IGetPollForViewDto) {
         if (data) {
@@ -16627,6 +16697,7 @@ export class GetPollForViewDto implements IGetPollForViewDto {
     init(data?: any) {
         if (data) {
             this.poll = data["poll"] ? PollDto.fromJS(data["poll"]) : <any>undefined;
+            this.userName = data["userName"];
         }
     }
 
@@ -16640,12 +16711,14 @@ export class GetPollForViewDto implements IGetPollForViewDto {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["poll"] = this.poll ? this.poll.toJSON() : <any>undefined;
+        data["userName"] = this.userName;
         return data; 
     }
 }
 
 export interface IGetPollForViewDto {
     poll: PollDto | undefined;
+    userName: string | undefined;
 }
 
 export class PollDto implements IPollDto {
@@ -16654,6 +16727,7 @@ export class PollDto implements IPollDto {
     option2!: string | undefined;
     option3!: string | undefined;
     option4!: string | undefined;
+    userId!: number | undefined;
     id!: number | undefined;
 
     constructor(data?: IPollDto) {
@@ -16672,6 +16746,7 @@ export class PollDto implements IPollDto {
             this.option2 = data["option2"];
             this.option3 = data["option3"];
             this.option4 = data["option4"];
+            this.userId = data["userId"];
             this.id = data["id"];
         }
     }
@@ -16690,6 +16765,7 @@ export class PollDto implements IPollDto {
         data["option2"] = this.option2;
         data["option3"] = this.option3;
         data["option4"] = this.option4;
+        data["userId"] = this.userId;
         data["id"] = this.id;
         return data; 
     }
@@ -16701,11 +16777,13 @@ export interface IPollDto {
     option2: string | undefined;
     option3: string | undefined;
     option4: string | undefined;
+    userId: number | undefined;
     id: number | undefined;
 }
 
 export class GetPollForEditOutput implements IGetPollForEditOutput {
     poll!: CreateOrEditPollDto | undefined;
+    userName!: string | undefined;
 
     constructor(data?: IGetPollForEditOutput) {
         if (data) {
@@ -16719,6 +16797,7 @@ export class GetPollForEditOutput implements IGetPollForEditOutput {
     init(data?: any) {
         if (data) {
             this.poll = data["poll"] ? CreateOrEditPollDto.fromJS(data["poll"]) : <any>undefined;
+            this.userName = data["userName"];
         }
     }
 
@@ -16732,12 +16811,14 @@ export class GetPollForEditOutput implements IGetPollForEditOutput {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["poll"] = this.poll ? this.poll.toJSON() : <any>undefined;
+        data["userName"] = this.userName;
         return data; 
     }
 }
 
 export interface IGetPollForEditOutput {
     poll: CreateOrEditPollDto | undefined;
+    userName: string | undefined;
 }
 
 export class CreateOrEditPollDto implements ICreateOrEditPollDto {
@@ -16746,6 +16827,7 @@ export class CreateOrEditPollDto implements ICreateOrEditPollDto {
     option2!: string | undefined;
     option3!: string | undefined;
     option4!: string | undefined;
+    userId!: number | undefined;
     id!: number | undefined;
 
     constructor(data?: ICreateOrEditPollDto) {
@@ -16764,6 +16846,7 @@ export class CreateOrEditPollDto implements ICreateOrEditPollDto {
             this.option2 = data["option2"];
             this.option3 = data["option3"];
             this.option4 = data["option4"];
+            this.userId = data["userId"];
             this.id = data["id"];
         }
     }
@@ -16782,6 +16865,7 @@ export class CreateOrEditPollDto implements ICreateOrEditPollDto {
         data["option2"] = this.option2;
         data["option3"] = this.option3;
         data["option4"] = this.option4;
+        data["userId"] = this.userId;
         data["id"] = this.id;
         return data; 
     }
@@ -16793,7 +16877,96 @@ export interface ICreateOrEditPollDto {
     option2: string | undefined;
     option3: string | undefined;
     option4: string | undefined;
+    userId: number | undefined;
     id: number | undefined;
+}
+
+export class PagedResultDtoOfPollUserLookupTableDto implements IPagedResultDtoOfPollUserLookupTableDto {
+    totalCount!: number | undefined;
+    items!: PollUserLookupTableDto[] | undefined;
+
+    constructor(data?: IPagedResultDtoOfPollUserLookupTableDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.totalCount = data["totalCount"];
+            if (data["items"] && data["items"].constructor === Array) {
+                this.items = [] as any;
+                for (let item of data["items"])
+                    this.items!.push(PollUserLookupTableDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): PagedResultDtoOfPollUserLookupTableDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new PagedResultDtoOfPollUserLookupTableDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["totalCount"] = this.totalCount;
+        if (this.items && this.items.constructor === Array) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IPagedResultDtoOfPollUserLookupTableDto {
+    totalCount: number | undefined;
+    items: PollUserLookupTableDto[] | undefined;
+}
+
+export class PollUserLookupTableDto implements IPollUserLookupTableDto {
+    id!: number | undefined;
+    displayName!: string | undefined;
+
+    constructor(data?: IPollUserLookupTableDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.id = data["id"];
+            this.displayName = data["displayName"];
+        }
+    }
+
+    static fromJS(data: any): PollUserLookupTableDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new PollUserLookupTableDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["displayName"] = this.displayName;
+        return data; 
+    }
+}
+
+export interface IPollUserLookupTableDto {
+    id: number | undefined;
+    displayName: string | undefined;
 }
 
 export class CurrentUserProfileEditDto implements ICurrentUserProfileEditDto {
