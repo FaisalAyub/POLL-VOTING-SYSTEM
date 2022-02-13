@@ -1,4 +1,4 @@
-<div [@routerTransition]>
+<div [@routerTransition] class="poll-component">
     <div class="m-subheader">
         <div class="kt-subheader kt-grid__item">
             <div class="mr-auto col-md-6">
@@ -122,7 +122,66 @@
                                 </tr>
                             </ng-template>                           
 							<ng-template pTemplate="body" let-record="$implicit">
-                                <tr>
+                              
+                                <div class="kt-content container poll-card">
+                                    <div class="kt-portlet kt-portlet--mobile">
+                                        <div class="kt-portlet__body">
+                                            <div class="row">
+                                                <div class="col-12"><img alt="Pic" class="header-profile-picture m--img-rounded m--marginless m--img-centered" src="http://localhost:4200/assets/common/images/default-profile-picture.png" style=""> 
+                                                    &nbsp; &nbsp; <span class="m-section__sub"> 
+                                                        <b>{{record?.userName}}</b> &nbsp; <label style="font-size: 13px; opacity: 0.6;">created a poll</label> </span>
+                                                    </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <h4 class="poll-heading">
+                                                        {{record?.poll?.title}}
+                                                    </h4>
+                                                </div>
+                                            </div>
+
+                                            <div class="row" style="padding-left: 60px;padding-top: 12px;">
+                                                <div class="col-12" *ngIf="record?.poll?.option1"> 
+                                                <label class="btn btn-secondary active w-50 text-left" [ngClass]="{'active': record?.poll?.checkedOption ==  record?.poll?.option1}" (click)="checkPollEvent(record,record?.poll?.option1)" >
+                                                    <input type="radio"
+                                                           name="SalesSummaryDateInterval+{{record?.poll?.id}}"
+                                                           value="appSalesSummaryDateInterval.Daily">
+                                                    {{record?.poll?.option1}}
+                                                </label>
+                                            </div>
+                                            <div class="col-12" *ngIf="record?.poll?.option2" >
+                                                <label class="btn btn-secondary w-50 text-left" [ngClass]="{'active': record?.poll?.checkedOption ==  record?.poll?.option2}" (click)="checkPollEvent(record,record?.poll?.option2)" >
+                                                    <input type="radio"
+                                                    name="SalesSummaryDateInterval+{{record?.poll?.id}}"
+                                                           value="appSalesSummaryDateInterval.Weekly">
+                                                    {{record?.poll?.option2}}
+                                                </label>
+                                            </div>
+
+                                            <div class="col-12" *ngIf="record?.poll?.option3">
+                                                <label class="btn btn-secondary w-50 text-left" [ngClass]="{'active': record?.poll?.checkedOption ==  record?.poll?.option3}" (click)="checkPollEvent(record,record?.poll?.option3)" >
+                                                    <input type="radio"
+                                                    name="SalesSummaryDateInterval+{{record?.poll?.id}}"
+                                                           value="appSalesSummaryDateInterval.Monthly">
+                                                    {{record?.poll?.option3}}
+                                                </label>
+                                            </div>
+
+                                            <div class="col-12" *ngIf="record?.poll?.option4">
+                                                <label class="btn btn-secondary w-50 text-left" [ngClass]="{'active': record?.poll?.checkedOption ==  record?.poll?.option4}" (click)="checkPollEvent(record,record?.poll?.option4)">
+                                                    <input type="radio"
+                                                           name="SalesSummaryDateInterval+{{record?.poll?.id}}"
+                                                           value="appSalesSummaryDateInterval.Monthly">
+                                                    {{record?.poll?.option4}}
+                                                </label>
+                                            </div>
+ 
+                                            </div>
+                                            </div>
+                                            </div>
+                                        </div>
+
+                                <!-- <tr>
                                     <td style="width: 130px"
                                         [hidden]="!isGrantedAny('Pages.Polls.Edit', 'Pages.Polls.Delete')">
                                        <div class="btn-group dropdown" dropdown container="body">
@@ -166,7 +225,7 @@
 											{{record.poll.option4}}
 										</td>
 
-                                </tr>
+                                </tr> -->
                             </ng-template>
                         </p-table>
 						<div class="primeng-no-data" *ngIf="primengTableHelper.totalRecordsCount == 0">

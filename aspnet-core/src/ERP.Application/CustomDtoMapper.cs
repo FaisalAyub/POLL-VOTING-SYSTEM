@@ -43,6 +43,8 @@ namespace ERP
     {
         public static void CreateMappings(IMapperConfigurationExpression configuration)
         {
+           configuration.CreateMap<CreateOrEditVoteDto, Vote>();
+           configuration.CreateMap<Vote, VoteDto>();
            configuration.CreateMap<CreateOrEditPollDto, Poll>();
            configuration.CreateMap<Poll, PollDto>();
  

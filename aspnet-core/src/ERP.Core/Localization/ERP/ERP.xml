@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <localizationDictionary culture="en">
-  <texts>    <text name="PickUser">Pick user</text>
+  <texts>    <text name="Vote">Vote</text>
+    <text name="CreateNewVote">Create new vote</text>
+    <text name="EditVote">Edit vote</text>
+    <text name="DeleteVote">Delete vote</text>
+    <text name="PickUser">Pick user</text>
     <text name="Entities">Entities</text>
     <text name="Poll">Poll</text>
     <text name="Title">Title</text>

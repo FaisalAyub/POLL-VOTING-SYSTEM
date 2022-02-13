@@ -16727,6 +16727,7 @@ export class PollDto implements IPollDto {
     option2!: string | undefined;
     option3!: string | undefined;
     option4!: string | undefined;
+    checkedOption!: string | undefined;
     userId!: number | undefined;
     id!: number | undefined;
 
@@ -16746,6 +16747,7 @@ export class PollDto implements IPollDto {
             this.option2 = data["option2"];
             this.option3 = data["option3"];
             this.option4 = data["option4"];
+            this.checkedOption = data["checkedOption"];
             this.userId = data["userId"];
             this.id = data["id"];
         }
@@ -16765,6 +16767,7 @@ export class PollDto implements IPollDto {
         data["option2"] = this.option2;
         data["option3"] = this.option3;
         data["option4"] = this.option4;
+        data["checkedOption"] = this.checkedOption;
         data["userId"] = this.userId;
         data["id"] = this.id;
         return data; 
@@ -16777,6 +16780,7 @@ export interface IPollDto {
     option2: string | undefined;
     option3: string | undefined;
     option4: string | undefined;
+    checkedOption: string | undefined;
     userId: number | undefined;
     id: number | undefined;
 }

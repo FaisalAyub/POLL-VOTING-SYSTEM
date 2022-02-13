@@ -16,7 +16,10 @@ import * as _ from 'lodash';
 import * as moment from 'moment';
 
 @Component({
-    templateUrl: './polls.component.html',
+    templateUrl: './polls.component.html', 
+     styleUrls: [
+        './polls.component.scss'
+    ],
     encapsulation: ViewEncapsulation.None,
     animations: [appModuleAnimation()]
 })
@@ -112,5 +115,16 @@ export class PollsComponent extends AppComponentBase {
         .subscribe(result => {
             this._fileDownloadService.downloadTempFile(result);
          });
+    }
+
+    checkPollEvent(record,option){
+        console.log(record)
+        console.log(this.primengTableHelper.records);
+      let item=  this.primengTableHelper.records.find(x=>x.poll.id==record.poll.id);
+      if(item){
+          item.poll.checkedOption=option;
+      }
+        console.log(this.primengTableHelper.records);
+        // this.primengTableHelper.records.find(x=>x.)
     }
 }

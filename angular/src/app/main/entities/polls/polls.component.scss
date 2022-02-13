@@ -1,0 +1,16 @@
+.poll-component{
+    .poll-card{
+        .header-profile-picture{
+            -ms-flex-item-align: center;
+            align-self: center;
+            height: 42px;
+            border-radius: 4px;
+        }
+
+        .poll-heading{
+            padding-left: 60px;
+            padding-top: 10px;
+        }
+    }
+}
+

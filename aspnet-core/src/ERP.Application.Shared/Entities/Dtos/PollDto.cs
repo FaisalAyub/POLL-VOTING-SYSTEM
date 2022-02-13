@@ -16,8 +16,8 @@ namespace ERP.Entities.Dtos
 
 		public string Option4 { get; set; }
 
-
-		 public long? UserId { get; set; }
+        public string CheckedOption { get; set; }
+        public long? UserId { get; set; }
 
 		 
     }
