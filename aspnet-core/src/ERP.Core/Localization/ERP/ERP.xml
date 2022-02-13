@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <localizationDictionary culture="en">
-  <texts>    <text name="Vote">Vote</text>
+  <texts>    <text name="count1">count 1</text>
+    <text name="count2">count 2</text>
+    <text name="count3">count 3</text>
+    <text name="count4">count 4</text>
+    <text name="Vote">Vote</text>
     <text name="CreateNewVote">Create new vote</text>
     <text name="EditVote">Edit vote</text>
     <text name="DeleteVote">Delete vote</text>

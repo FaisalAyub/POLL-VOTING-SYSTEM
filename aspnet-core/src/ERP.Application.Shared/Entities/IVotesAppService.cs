@@ -18,8 +18,9 @@ namespace ERP.Entities
 		Task CreateOrEdit(CreateOrEditVoteDto input);
 
 		Task Delete(EntityDto input);
+		Task<PagedResultDto<GetVoteForViewDto>> GetLoggedUserVotes();
 
-		
+
 		Task<PagedResultDto<VotePollLookupTableDto>> GetAllPollForLookupTable(GetAllForLookupTableInput input);
 		
     }

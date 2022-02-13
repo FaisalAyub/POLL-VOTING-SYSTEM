@@ -4,14 +4,16 @@ using ERP.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ERP.Migrations
 {
     [DbContext(typeof(ERPDbContext))]
-    partial class ERPDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220213063527_Regenerated_Poll6080")]
+    partial class Regenerated_Poll6080
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1151,13 +1153,13 @@ namespace ERP.Migrations
 
                     b.Property<long?>("UserId");
 
-                    b.Property<int?>("count1");
+                    b.Property<int>("count1");
 
-                    b.Property<int?>("count2");
+                    b.Property<int>("count2");
 
-                    b.Property<int?>("count3");
+                    b.Property<int>("count3");
 
-                    b.Property<int?>("count4");
+                    b.Property<int>("count4");
 
                     b.HasKey("Id");
 

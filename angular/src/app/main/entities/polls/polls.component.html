@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class="kt-content">
-        <div class="kt-portlet kt-portlet--mobile">
+        <div class="">
             <div class="kt-portlet__body">
 
 				<form class="horizontal-form" autocomplete="off">
@@ -95,7 +95,7 @@
                                      ScrollWidth="100%"
                                      [responsive]="primengTableHelper.isResponsive"
                                      [resizableColumns]="primengTableHelper.resizableColumns">
-                            <ng-template pTemplate="header">
+                            <!-- <ng-template pTemplate="header">
                                 <tr>
                                     <th style="width: 130px" [hidden]="!isGrantedAny('Pages.Polls.Edit', 'Pages.Polls.Delete')">{{l('Actions')}}</th>
                                     <th style="width: 150px" pSortableColumn="title">
@@ -120,7 +120,7 @@
                                     </th>
 
                                 </tr>
-                            </ng-template>                           
+                            </ng-template>                            -->
 							<ng-template pTemplate="body" let-record="$implicit">
                               
                                 <div class="kt-content container poll-card">
@@ -142,44 +142,53 @@
 
                                             <div class="row" style="padding-left: 60px;padding-top: 12px;">
                                                 <div class="col-12" *ngIf="record?.poll?.option1"> 
-                                                <label class="btn btn-secondary active w-50 text-left" [ngClass]="{'active': record?.poll?.checkedOption ==  record?.poll?.option1}" (click)="checkPollEvent(record,record?.poll?.option1,1)" >
+                                                <label class="btn btn-secondary active w-50 text-left" [ngClass]="{'active': record?.poll?.checkedOption ==  1}" (click)="checkPollEvent(record,record?.poll?.option1,1)" >
                                                     <input type="radio"
                                                            name="SalesSummaryDateInterval+{{record?.poll?.id}}"
                                                            value="appSalesSummaryDateInterval.Daily">
                                                     {{record?.poll?.option1}}
-                                                </label>
+                                                </label> 
+                                                &nbsp; &nbsp;<b>{{record?.poll?.count1}} votes</b> 
                                             </div>
                                             <div class="col-12" *ngIf="record?.poll?.option2" >
-                                                <label class="btn btn-secondary w-50 text-left" [ngClass]="{'active': record?.poll?.checkedOption ==  record?.poll?.option2}" (click)="checkPollEvent(record,record?.poll?.option2,2)" >
+                                                <label class="btn btn-secondary w-50 text-left" [ngClass]="{'active': record?.poll?.checkedOption ==  2}" (click)="checkPollEvent(record,record?.poll?.option2,2)" >
                                                     <input type="radio"
                                                     name="SalesSummaryDateInterval+{{record?.poll?.id}}"
                                                            value="appSalesSummaryDateInterval.Weekly">
                                                     {{record?.poll?.option2}}
                                                 </label>
+                                                &nbsp; &nbsp;<b>{{record?.poll?.count2}} votes</b> 
                                             </div>
 
                                             <div class="col-12" *ngIf="record?.poll?.option3">
-                                                <label class="btn btn-secondary w-50 text-left" [ngClass]="{'active': record?.poll?.checkedOption ==  record?.poll?.option3}" (click)="checkPollEvent(record,record?.poll?.option3,3)" >
+                                                <label class="btn btn-secondary w-50 text-left" [ngClass]="{'active': record?.poll?.checkedOption ==  3}" (click)="checkPollEvent(record,record?.poll?.option3,3)" >
                                                     <input type="radio"
                                                     name="SalesSummaryDateInterval+{{record?.poll?.id}}"
                                                            value="appSalesSummaryDateInterval.Monthly">
                                                     {{record?.poll?.option3}}
                                                 </label>
+                                                &nbsp; &nbsp;<b>{{record?.poll?.count3}} votes</b> 
                                             </div>
 
                                             <div class="col-12" *ngIf="record?.poll?.option4">
-                                                <label class="btn btn-secondary w-50 text-left" [ngClass]="{'active': record?.poll?.checkedOption ==  record?.poll?.option4}" (click)="checkPollEvent(record,record?.poll?.option4,4)">
+                                                <label class="btn btn-secondary w-50 text-left" [ngClass]="{'active': record?.poll?.checkedOption == 4}" (click)="checkPollEvent(record,record?.poll?.option4,4)">
                                                     <input type="radio"
                                                            name="SalesSummaryDateInterval+{{record?.poll?.id}}"
                                                            value="appSalesSummaryDateInterval.Monthly">
                                                     {{record?.poll?.option4}}
                                                 </label>
+                                                &nbsp; &nbsp;<b>{{record?.poll?.count4}} votes</b> 
                                             </div>
  
                                             </div>
+                                            <div class="kt-chat__input container" id="ChatMessageWrapper"><div class="kt-chat__editor col-md-4 col-6" style="padding-left: 50px;">
+                                            <textarea class="kt-messenger__forkt-input ng-touched ng-dirty ng-invalid" id="ChatMessage" maxlength="4096" name="message" 
+                                             placeholder="Type a message here..." required="" type="text" style="width: 100%;"></textarea>                                            
+                                            <button class="btn btn-brand btn-md  btn-font-sm btn-upper btn-bold kt-chat__reply" id="SendChatMessageButton" type="button" style="text-align: right;float: right;">Reply</button></div></div>
                                             </div>
-                                            </div>
+                                            </div> 
                                         </div>
+                                        
 
                                 <!-- <tr>
                                     <td style="width: 130px"

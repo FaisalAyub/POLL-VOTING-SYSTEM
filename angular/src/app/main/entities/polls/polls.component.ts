@@ -1,6 +1,5 @@
-import { Component, Injector, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, Injector, ViewEncapsulation, ViewChild, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Http } from '@angular/http';
 import { PollsServiceProxy, PollDto, VotesServiceProxy, CreateOrEditVoteDto  } from '@shared/service-proxies/service-proxies';
 import { NotifyService } from '@abp/notify/notify.service';
 import { AppComponentBase } from '@shared/common/app-component-base';
@@ -117,17 +116,28 @@ export class PollsComponent extends AppComponentBase {
             this._fileDownloadService.downloadTempFile(result);
          });
     }
-
-    checkPollEvent(record,option,checkedOption){
+ 
+    checkPollEvent(record,option,checkedOption,e){
+         
         console.log(record)
         console.log(this.primengTableHelper.records);
       let item=  this.primengTableHelper.records.find(x=>x.poll.id==record.poll.id);
       if(item){
-          item.poll.checkedOption=option;
+          item.poll.checkedOption=checkedOption;
+          if(checkedOption==1){
+              item.poll.count1+=1;
+          }else if(checkedOption==2){
+            item.poll.count2+=1;
+            }else if(checkedOption==3){
+                item.poll.count3+=1;
+            }else if(checkedOption==4){
+                item.poll.count4+=1;
+            }
       }
       let requestItem:any={pollId:record.poll.id,selectedOption:checkedOption};
-      this._votesServiceProxy.createOrEdit(requestItem).subscribe((res)=>{
-        console.log(res);
-      })
+        this._votesServiceProxy.createOrEdit(requestItem).subscribe((res)=>{
+            // this.reloadPage();
+           
+          }) 
     }
 }

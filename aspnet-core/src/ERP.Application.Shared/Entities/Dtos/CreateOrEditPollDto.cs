@@ -23,6 +23,18 @@ namespace ERP.Entities.Dtos
 		public string Option4 { get; set; }
 		
 		
+		public int? count1 { get; set; }
+		
+		
+		public int? count2 { get; set; }
+		
+		
+		public int? count3 { get; set; }
+		
+		
+		public int? count4 { get; set; }
+		
+		
 		 public long? UserId { get; set; }
 		 
 		 

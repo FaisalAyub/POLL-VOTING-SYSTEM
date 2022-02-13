@@ -21,6 +21,14 @@ namespace ERP.Entities
 		
 		public virtual string Option4 { get; set; }
 		
+		public virtual int? count1 { get; set; }
+		
+		public virtual int? count2 { get; set; }
+		
+		public virtual int? count3 { get; set; }
+		
+		public virtual int? count4 { get; set; }
+		
 
 		public virtual long? UserId { get; set; }
 		

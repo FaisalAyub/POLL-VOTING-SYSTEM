@@ -59,7 +59,7 @@ namespace ERP.Authorization.Users
             CheckSelfRegistrationIsEnabled();
 
             var tenant = await GetActiveTenantAsync();
-            var isNewRegisteredUserActiveByDefault = await SettingManager.GetSettingValueAsync<bool>(AppSettings.UserManagement.IsNewRegisteredUserActiveByDefault);
+           // var isNewRegisteredUserActiveByDefault = await SettingManager.GetSettingValueAsync<bool>(AppSettings.UserManagement.IsNewRegisteredUserActiveByDefault);
             
            // await _userPolicy.CheckMaxUserCountAsync(tenant.Id);
 
@@ -69,7 +69,7 @@ namespace ERP.Authorization.Users
                 Name = name,
                 Surname = surname,
                 EmailAddress = emailAddress,
-                IsActive = isNewRegisteredUserActiveByDefault,
+                IsActive = true,
                 UserName = userName,
                 IsEmailConfirmed = isEmailConfirmed,
                 Roles = new List<UserRole>()

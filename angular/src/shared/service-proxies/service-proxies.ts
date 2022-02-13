@@ -10464,6 +10464,57 @@ export class VotesServiceProxy {
     }
 
     /**
+     * @return Success
+     */
+    getLoggedUserVotes(): Observable<PagedResultDtoOfGetVoteForViewDto> {
+        let url_ = this.baseUrl + "/api/services/app/Votes/GetLoggedUserVotes";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetLoggedUserVotes(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetLoggedUserVotes(<any>response_);
+                } catch (e) {
+                    return <Observable<PagedResultDtoOfGetVoteForViewDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<PagedResultDtoOfGetVoteForViewDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetLoggedUserVotes(response: HttpResponseBase): Observable<PagedResultDtoOfGetVoteForViewDto> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? PagedResultDtoOfGetVoteForViewDto.fromJS(resultData200) : new PagedResultDtoOfGetVoteForViewDto();
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<PagedResultDtoOfGetVoteForViewDto>(<any>null);
+    }
+
+    /**
      * @param id (optional) 
      * @return Success
      */
@@ -17078,6 +17129,10 @@ export class PollDto implements IPollDto {
     option2!: string | undefined;
     option3!: string | undefined;
     option4!: string | undefined;
+    count1!: number | undefined;
+    count2!: number | undefined;
+    count3!: number | undefined;
+    count4!: number | undefined;
     checkedOption!: string | undefined;
     userId!: number | undefined;
     id!: number | undefined;
@@ -17098,6 +17153,10 @@ export class PollDto implements IPollDto {
             this.option2 = data["option2"];
             this.option3 = data["option3"];
             this.option4 = data["option4"];
+            this.count1 = data["count1"];
+            this.count2 = data["count2"];
+            this.count3 = data["count3"];
+            this.count4 = data["count4"];
             this.checkedOption = data["checkedOption"];
             this.userId = data["userId"];
             this.id = data["id"];
@@ -17118,6 +17177,10 @@ export class PollDto implements IPollDto {
         data["option2"] = this.option2;
         data["option3"] = this.option3;
         data["option4"] = this.option4;
+        data["count1"] = this.count1;
+        data["count2"] = this.count2;
+        data["count3"] = this.count3;
+        data["count4"] = this.count4;
         data["checkedOption"] = this.checkedOption;
         data["userId"] = this.userId;
         data["id"] = this.id;
@@ -17131,6 +17194,10 @@ export interface IPollDto {
     option2: string | undefined;
     option3: string | undefined;
     option4: string | undefined;
+    count1: number | undefined;
+    count2: number | undefined;
+    count3: number | undefined;
+    count4: number | undefined;
     checkedOption: string | undefined;
     userId: number | undefined;
     id: number | undefined;
@@ -17182,6 +17249,10 @@ export class CreateOrEditPollDto implements ICreateOrEditPollDto {
     option2!: string | undefined;
     option3!: string | undefined;
     option4!: string | undefined;
+    count1!: number | undefined;
+    count2!: number | undefined;
+    count3!: number | undefined;
+    count4!: number | undefined;
     userId!: number | undefined;
     id!: number | undefined;
 
@@ -17201,6 +17272,10 @@ export class CreateOrEditPollDto implements ICreateOrEditPollDto {
             this.option2 = data["option2"];
             this.option3 = data["option3"];
             this.option4 = data["option4"];
+            this.count1 = data["count1"];
+            this.count2 = data["count2"];
+            this.count3 = data["count3"];
+            this.count4 = data["count4"];
             this.userId = data["userId"];
             this.id = data["id"];
         }
@@ -17220,6 +17295,10 @@ export class CreateOrEditPollDto implements ICreateOrEditPollDto {
         data["option2"] = this.option2;
         data["option3"] = this.option3;
         data["option4"] = this.option4;
+        data["count1"] = this.count1;
+        data["count2"] = this.count2;
+        data["count3"] = this.count3;
+        data["count4"] = this.count4;
         data["userId"] = this.userId;
         data["id"] = this.id;
         return data; 
@@ -17232,6 +17311,10 @@ export interface ICreateOrEditPollDto {
     option2: string | undefined;
     option3: string | undefined;
     option4: string | undefined;
+    count1: number | undefined;
+    count2: number | undefined;
+    count3: number | undefined;
+    count4: number | undefined;
     userId: number | undefined;
     id: number | undefined;
 }
@@ -21917,6 +22000,7 @@ export interface IGetVoteForViewDto {
 
 export class VoteDto implements IVoteDto {
     pollId!: number | undefined;
+    selectOpt!: number | undefined;
     id!: number | undefined;
 
     constructor(data?: IVoteDto) {
@@ -21931,6 +22015,7 @@ export class VoteDto implements IVoteDto {
     init(data?: any) {
         if (data) {
             this.pollId = data["pollId"];
+            this.selectOpt = data["selectOpt"];
             this.id = data["id"];
         }
     }
@@ -21945,6 +22030,7 @@ export class VoteDto implements IVoteDto {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["pollId"] = this.pollId;
+        data["selectOpt"] = this.selectOpt;
         data["id"] = this.id;
         return data; 
     }
@@ -21952,6 +22038,7 @@ export class VoteDto implements IVoteDto {
 
 export interface IVoteDto {
     pollId: number | undefined;
+    selectOpt: number | undefined;
     id: number | undefined;
 }
 

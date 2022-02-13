@@ -9,6 +9,8 @@ namespace ERP.Entities.Dtos
 
 		 public int? PollId { get; set; }
 
-		 
+        public int? selectOpt { get; set; }
+
+
     }
 }

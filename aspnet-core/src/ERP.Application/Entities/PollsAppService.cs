@@ -64,6 +64,10 @@ namespace ERP.Entities
                                 Option2 = o.Option2,
                                 Option3 = o.Option3,
                                 Option4 = o.Option4,
+                                count1 = o.count1,
+                                count2 = o.count2,
+                                count3 = o.count3,
+                                count4 = o.count4,
                                 Id = o.Id,
                                 UserId=o.UserId
                             },
@@ -113,7 +117,11 @@ namespace ERP.Entities
          {
             input.UserId = Convert.ToInt32(AbpSession.UserId);
             if (input.Id == null){
-				await Create(input);
+                input.count1 = 0;
+                input.count2 = 0;
+                input.count3 = 0;
+                input.count4 = 0;
+                await Create(input);
 			}
 			else{
 				await Update(input);

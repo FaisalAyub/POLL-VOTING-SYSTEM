@@ -63,8 +63,34 @@ namespace ERP.Entities
                 await votes.ToListAsync()
             );
          }
-		 
-		 public async Task<GetVoteForViewDto> GetVoteForView(int id)
+
+        public async Task<PagedResultDto<GetVoteForViewDto>> GetLoggedUserVotes()
+        {
+            var loggedUserId = Convert.ToInt32(AbpSession.UserId);
+            var filteredVotes = _voteRepository.GetAll().Where(x=>x.CreatorUserId== loggedUserId);
+
+            var votes = from o in filteredVotes
+
+                        select new GetVoteForViewDto()
+                        {
+                            Vote = new VoteDto
+                            {
+                                Id = o.Id,
+                                selectOpt = o.selectedOption,
+                                PollId = o.PollId,
+                            }
+                        };
+
+            var totalCount = await filteredVotes.CountAsync();
+
+            return new PagedResultDto<GetVoteForViewDto>(
+                totalCount,
+                await votes.ToListAsync()
+            );
+        }
+
+
+        public async Task<GetVoteForViewDto> GetVoteForView(int id)
          {
             var vote = await _voteRepository.GetAsync(id);
 
@@ -99,16 +125,57 @@ namespace ERP.Entities
          {
             var logedUserId = Convert.ToInt32(AbpSession.UserId);
              var item=  _voteRepository.GetAll().FirstOrDefault(x => x.PollId == input.PollId && x.CreatorUserId == logedUserId);
-             
+              var pollRecord=  _lookup_pollRepository.GetAll().FirstOrDefault(x => x.Id == input.PollId);
+
+            if (input.selectedOption == 1)
+            {
+                pollRecord.count1 += 1;
+            }
+            else if (input.selectedOption == 2)
+            {
+                pollRecord.count2 += 1;
+            }
+            else if (input.selectedOption == 3)
+            {
+                pollRecord.count3 += 1;
+            }
+            else if (input.selectedOption == 4)
+            {
+                pollRecord.count4 += 1;
+            }
+
             if (item==null)
             {
-				await Create(input);
+               
+                
+                await Create(input);
 			}
-			else{
+			else{ 
+
+                if (item.selectedOption == 1)
+                {
+                    pollRecord.count1 -= 1;
+                }
+                else if (item.selectedOption == 2)
+                {
+                    pollRecord.count2 -= 1;
+                }
+                else if (item.selectedOption == 3)
+                {
+                    pollRecord.count3 -= 1;
+                }
+                else if (item.selectedOption == 4)
+                {
+                    pollRecord.count4 -= 1;
+                }
+                 
+                
+
                 input.Id = item.Id;
 				await Update(input);
 			}
-         }
+            _lookup_pollRepository.Update(pollRecord);
+        }
 
 		 [AbpAuthorize(AppPermissions.Pages_Votes_Create)]
 		 private async Task Create(CreateOrEditVoteDto input)
