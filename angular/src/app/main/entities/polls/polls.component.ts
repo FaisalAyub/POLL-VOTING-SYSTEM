@@ -1,7 +1,7 @@
 import { Component, Injector, ViewEncapsulation, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Http } from '@angular/http';
-import { PollsServiceProxy, PollDto  } from '@shared/service-proxies/service-proxies';
+import { PollsServiceProxy, PollDto, VotesServiceProxy, CreateOrEditVoteDto  } from '@shared/service-proxies/service-proxies';
 import { NotifyService } from '@abp/notify/notify.service';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { TokenAuthServiceProxy } from '@shared/service-proxies/service-proxies';
@@ -45,6 +45,7 @@ export class PollsComponent extends AppComponentBase {
     constructor(
         injector: Injector,
         private _pollsServiceProxy: PollsServiceProxy,
+        private _votesServiceProxy: VotesServiceProxy,
         private _notifyService: NotifyService,
         private _tokenAuth: TokenAuthServiceProxy,
         private _activatedRoute: ActivatedRoute,
@@ -117,14 +118,16 @@ export class PollsComponent extends AppComponentBase {
          });
     }
 
-    checkPollEvent(record,option){
+    checkPollEvent(record,option,checkedOption){
         console.log(record)
         console.log(this.primengTableHelper.records);
       let item=  this.primengTableHelper.records.find(x=>x.poll.id==record.poll.id);
       if(item){
           item.poll.checkedOption=option;
       }
-        console.log(this.primengTableHelper.records);
-        // this.primengTableHelper.records.find(x=>x.)
+      let requestItem:any={pollId:record.poll.id,selectedOption:checkedOption};
+      this._votesServiceProxy.createOrEdit(requestItem).subscribe((res)=>{
+        console.log(res);
+      })
     }
 }

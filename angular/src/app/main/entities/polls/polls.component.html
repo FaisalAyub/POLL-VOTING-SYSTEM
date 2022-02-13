@@ -142,7 +142,7 @@
 
                                             <div class="row" style="padding-left: 60px;padding-top: 12px;">
                                                 <div class="col-12" *ngIf="record?.poll?.option1"> 
-                                                <label class="btn btn-secondary active w-50 text-left" [ngClass]="{'active': record?.poll?.checkedOption ==  record?.poll?.option1}" (click)="checkPollEvent(record,record?.poll?.option1)" >
+                                                <label class="btn btn-secondary active w-50 text-left" [ngClass]="{'active': record?.poll?.checkedOption ==  record?.poll?.option1}" (click)="checkPollEvent(record,record?.poll?.option1,1)" >
                                                     <input type="radio"
                                                            name="SalesSummaryDateInterval+{{record?.poll?.id}}"
                                                            value="appSalesSummaryDateInterval.Daily">
@@ -150,7 +150,7 @@
                                                 </label>
                                             </div>
                                             <div class="col-12" *ngIf="record?.poll?.option2" >
-                                                <label class="btn btn-secondary w-50 text-left" [ngClass]="{'active': record?.poll?.checkedOption ==  record?.poll?.option2}" (click)="checkPollEvent(record,record?.poll?.option2)" >
+                                                <label class="btn btn-secondary w-50 text-left" [ngClass]="{'active': record?.poll?.checkedOption ==  record?.poll?.option2}" (click)="checkPollEvent(record,record?.poll?.option2,2)" >
                                                     <input type="radio"
                                                     name="SalesSummaryDateInterval+{{record?.poll?.id}}"
                                                            value="appSalesSummaryDateInterval.Weekly">
@@ -159,7 +159,7 @@
                                             </div>
 
                                             <div class="col-12" *ngIf="record?.poll?.option3">
-                                                <label class="btn btn-secondary w-50 text-left" [ngClass]="{'active': record?.poll?.checkedOption ==  record?.poll?.option3}" (click)="checkPollEvent(record,record?.poll?.option3)" >
+                                                <label class="btn btn-secondary w-50 text-left" [ngClass]="{'active': record?.poll?.checkedOption ==  record?.poll?.option3}" (click)="checkPollEvent(record,record?.poll?.option3,3)" >
                                                     <input type="radio"
                                                     name="SalesSummaryDateInterval+{{record?.poll?.id}}"
                                                            value="appSalesSummaryDateInterval.Monthly">
@@ -168,7 +168,7 @@
                                             </div>
 
                                             <div class="col-12" *ngIf="record?.poll?.option4">
-                                                <label class="btn btn-secondary w-50 text-left" [ngClass]="{'active': record?.poll?.checkedOption ==  record?.poll?.option4}" (click)="checkPollEvent(record,record?.poll?.option4)">
+                                                <label class="btn btn-secondary w-50 text-left" [ngClass]="{'active': record?.poll?.checkedOption ==  record?.poll?.option4}" (click)="checkPollEvent(record,record?.poll?.option4,4)">
                                                     <input type="radio"
                                                            name="SalesSummaryDateInterval+{{record?.poll?.id}}"
                                                            value="appSalesSummaryDateInterval.Monthly">

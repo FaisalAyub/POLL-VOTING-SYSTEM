@@ -97,10 +97,15 @@ namespace ERP.Entities
 
 		 public async Task CreateOrEdit(CreateOrEditVoteDto input)
          {
-            if(input.Id == null){
+            var logedUserId = Convert.ToInt32(AbpSession.UserId);
+             var item=  _voteRepository.GetAll().FirstOrDefault(x => x.PollId == input.PollId && x.CreatorUserId == logedUserId);
+             
+            if (item==null)
+            {
 				await Create(input);
 			}
 			else{
+                input.Id = item.Id;
 				await Update(input);
 			}
          }
