@@ -1,3 +1,5 @@
+using ERP.Entities.Dtos;
+using ERP.Entities;
 using Abp.Application.Editions;
 using Abp.Application.Features;
 using Abp.Auditing;
@@ -41,6 +43,8 @@ namespace ERP
     {
         public static void CreateMappings(IMapperConfigurationExpression configuration)
         {
+           configuration.CreateMap<CreateOrEditPollDto, Poll>();
+           configuration.CreateMap<Poll, PollDto>();
  
             //Inputs
             configuration.CreateMap<CheckboxInputType, FeatureInputTypeDto>();

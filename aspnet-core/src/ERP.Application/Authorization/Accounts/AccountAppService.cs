@@ -100,7 +100,7 @@ namespace ERP.Authorization.Accounts
                 input.EmailAddress,
                 input.UserName,
                 input.Password,
-                false,
+                true,
                 AppUrlService.CreateEmailActivationUrlFormat(AbpSession.TenantId)
             );
 
@@ -108,7 +108,7 @@ namespace ERP.Authorization.Accounts
 
             return new RegisterOutput
             {
-                CanLogin = user.IsActive && (user.IsEmailConfirmed || !isEmailConfirmationRequiredForLogin)
+                CanLogin =  (user.IsEmailConfirmed || !isEmailConfirmationRequiredForLogin)
             };
         }
 

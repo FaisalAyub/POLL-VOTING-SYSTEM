@@ -5,7 +5,12 @@ namespace ERP.Authorization
     /// <see cref="AppAuthorizationProvider"/> for permission definitions.
     /// </summary>
     public static class AppPermissions
-    { 
+    {
+        public const string Pages_Polls = "Pages.Polls";
+        public const string Pages_Polls_Create = "Pages.Polls.Create";
+        public const string Pages_Polls_Edit = "Pages.Polls.Edit";
+        public const string Pages_Polls_Delete = "Pages.Polls.Delete";
+ 
           
         //COMMON PERMISSIONS (FOR BOTH OF TENANTS AND HOST)
 

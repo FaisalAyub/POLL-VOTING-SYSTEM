@@ -1,0 +1,53 @@
+<div bsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #pollForm="ngForm" novalidate (ngSubmit)="save()" autocomplete="off">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <span *ngIf="poll.id">{{l("EditPoll")}}</span>
+                        <span *ngIf="!poll.id">{{l("CreateNewPoll")}}</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" aria-label="Close" [disabled]="saving">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                 
+
+
+								<div class="form-group">
+									<label for="Poll_Title">{{l("Title")}}</label>
+									<input type="text" id="Poll_Title" class="form-control" [(ngModel)]="poll.title" name="Title"    />
+								</div>
+					
+								<div class="form-group">
+									<label for="Poll_Option1">{{l("Option1")}}</label>
+									<input type="text" id="Poll_Option1" class="form-control" [(ngModel)]="poll.option1" name="Option1"    />
+								</div>
+					
+								<div class="form-group">
+									<label for="Poll_Option2">{{l("Option2")}}</label>
+									<input type="text" id="Poll_Option2" class="form-control" [(ngModel)]="poll.option2" name="Option2"    />
+								</div>
+					
+								<div class="form-group">
+									<label for="Poll_Option3">{{l("Option3")}}</label>
+									<input type="text" id="Poll_Option3" class="form-control" [(ngModel)]="poll.option3" name="Option3"    />
+								</div>
+					
+								<div class="form-group">
+									<label for="Poll_Option4">{{l("Option4")}}</label>
+									<input type="text" id="Poll_Option4" class="form-control" [(ngModel)]="poll.option4" name="Option4"    />
+								</div>
+					
+
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">{{l("Cancel")}}</button>
+                    <button type="submit" class="btn btn-primary blue" [disabled]="!pollForm.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i> <span>{{l("Save")}}</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

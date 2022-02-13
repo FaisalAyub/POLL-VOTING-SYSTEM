@@ -30,6 +30,13 @@ namespace ERP.Authorization
 
             var pages = context.GetPermissionOrNull(AppPermissions.Pages) ?? context.CreatePermission(AppPermissions.Pages, L("Pages"));
 
+            var polls = pages.CreateChildPermission(AppPermissions.Pages_Polls, L("Polls"), multiTenancySides: MultiTenancySides.Host);
+            polls.CreateChildPermission(AppPermissions.Pages_Polls_Create, L("CreateNewPoll"), multiTenancySides: MultiTenancySides.Host);
+            polls.CreateChildPermission(AppPermissions.Pages_Polls_Edit, L("EditPoll"), multiTenancySides: MultiTenancySides.Host);
+            polls.CreateChildPermission(AppPermissions.Pages_Polls_Delete, L("DeletePoll"), multiTenancySides: MultiTenancySides.Host);
+
+
+
             //var glacgrp = pages.CreateChildPermission(AppPermissions.Pages_GLACGRP, L("GLACGRP"));
             //glacgrp.CreateChildPermission(AppPermissions.Pages_GLACGRP_Create, L("CreateNewGLACGRP"));
             //glacgrp.CreateChildPermission(AppPermissions.Pages_GLACGRP_Edit, L("EditGLACGRP"));

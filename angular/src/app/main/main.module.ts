@@ -2,6 +2,10 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppCommonModule } from '@app/shared/common/app-common.module';
+import { PollsComponent } from './entities/polls/polls.component';
+import { ViewPollModalComponent } from './entities/polls/view-poll-modal.component';
+import { CreateOrEditPollModalComponent } from './entities/polls/create-or-edit-poll-modal.component';
+
 import { AutoCompleteModule } from 'primeng/primeng';
 import { PaginatorModule } from 'primeng/primeng';
 import { EditorModule } from 'primeng/primeng';
@@ -43,7 +47,9 @@ NgxBootstrapDatePickerConfigService.registerNgxBootstrapDatePickerLocales();
         BsDropdownModule.forRoot(),
         PopoverModule.forRoot()
     ],
-    declarations: [ 
+    declarations: [
+		PollsComponent,
+		ViewPollModalComponent,		CreateOrEditPollModalComponent, 
         DashboardComponent
     ],
     providers: [

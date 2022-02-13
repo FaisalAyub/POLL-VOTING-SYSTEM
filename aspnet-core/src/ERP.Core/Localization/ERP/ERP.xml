@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <localizationDictionary culture="en">
-  <texts>
+  <texts>    <text name="Entities">Entities</text>
+    <text name="Poll">Poll</text>
+    <text name="Title">Title</text>
+    <text name="Option1">Option 1</text>
+    <text name="Option2">Option 2</text>
+    <text name="Option3">Option 3</text>
+    <text name="Option4">Option 4</text>
+    <text name="PollsHeaderInfo">Polls header info</text>
+    <text name="CreateNewPoll">Create new poll</text>
+    <text name="EditPoll">Edit poll</text>
+    <text name="DeletePoll">Delete poll</text>
+    <text name="Polls">Polls</text>
+    <text name="MinMax">Min-Max</text>
+
     <text name="AccountGroup">Account group</text>
     <text name="GLACGRP">Account group</text>
     <text name="ACCTGRPCOD">Account group</text>
