@@ -14,9 +14,9 @@ import { LazyLoadEvent } from 'primeng/components/common/lazyloadevent';
 })
 export class UserLookupTableModalComponent extends AppComponentBase {
 
-    @ViewChild('createOrEditModal') modal: ModalDirective;
-    @ViewChild('dataTable') dataTable: Table;
-    @ViewChild('paginator') paginator: Paginator;
+    @ViewChild('createOrEditModal', {static: true}) modal: ModalDirective;
+    @ViewChild('dataTable', {static: true}) dataTable: Table;
+    @ViewChild('paginator', {static: true}) paginator: Paginator;
 
     filterText = '';
     id: number;
